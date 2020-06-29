@@ -50,7 +50,7 @@ server.on('subscribed', (topic, client) => {
         console.log('ISR Manager on');
       })
       console.log(user_id + " requested " + topic)
-      ISR_Manager.publish(topic, '{"session" : "' + makeSessionId(6) + ', "status" : "granted"}')
+      ISR_Manager.publish(topic, '{"session" : "vs56lj", "status" : "granted"}')
       console.log("session granted to " + user_id)
 
       ISR_Manager.end();

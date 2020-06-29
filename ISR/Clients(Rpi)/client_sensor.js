@@ -6,7 +6,7 @@ require('moment-timezone');
 var count = 0;
 
 var user_id = "user01";
-var session_info = {}
+var session_info;
 
 client.on('connect', function () {
   client.subscribe(user_id + '/session/request', function (err) {
@@ -23,22 +23,25 @@ client.on('message', function (topic, message) {
     if (topic_arr[2] == "request") {
       console.log(user_id + " Assigned ");
       client.unsubscribe(user_id + '/session/request', () => {
-        session_info = message.toString();
-        console.log(session_info + "assigned");
+        session_info = JSON.parse(message);
+        console.log(message + "assigned");
+
+        
+    var sendMessage = setInterval(() => {
+
+      moment.tz.setDefault("Asia/Seoul");
+      var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+      client.publish('/session/'+session_info.session, timeNow)
+      console.log("datasend to "+session_info.session);
+      if (count > 1000) {
+        clearInterval(sendMessage);
+      }
+    }, 1000)
+
       })
     }
   }
 
 })
-/*
-var sendMessage = setInterval(() => {
 
-  moment.tz.setDefault("Asia/Seoul");
-  var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-  client.publish('/session/abcd001', timeNow)
 
-  if (count > 1000) {
-    clearInterval(sendMessage);
-  }
-}, 100)
-*/

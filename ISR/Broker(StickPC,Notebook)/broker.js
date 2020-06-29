@@ -86,3 +86,12 @@ server.on('clientDisconnected', function (client) {
   // })
 
 });
+
+server.on('published', function(packet, client) {
+  console.log('Published', packet.payload.toString() + packet.topic );
+});
+
+
+server.on('subscribed', function(topic, client) {
+  console.log('subscribed', topic);
+});
