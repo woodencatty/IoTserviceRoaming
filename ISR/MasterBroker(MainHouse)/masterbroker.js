@@ -50,9 +50,11 @@ server.on('subscribed', (topic, client) => {
       user_session.user_id = user_id;
       user_session.broker_id = broker_id;
       user_session.session_id = "vs56lj";
-      
+
       console.log(user_id + " requested " + topic)
       ISR_Manager.publish(topic, '{"session" : "vs56lj", "status" : "granted"}')
+      ISR_Manager.publish(user_id+'/session/info', user_session);
+
       console.log("session granted to " + user_id)
 
       ISR_Manager.end();
