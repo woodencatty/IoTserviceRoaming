@@ -8,8 +8,11 @@ var ascoltatore = {
   mongo: {}
 };
  
+var moment = require('moment');
+require('moment-timezone');
+
 var settings = {
-  port: 3389,
+  port: 1883,
   backend: ascoltatore
 };
  
@@ -21,7 +24,9 @@ server.on('clientConnected', function(client) {
  
 // fired when a message is received
 server.on('published', function(packet, client) {
-  console.log('Published', packet.payload);
+  moment.tz.setDefault("Asia/Seoul");
+  var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+  console.log('Published at '+timeNow+ " Sent at "+ packet.payload.toString());
 });
  
 server.on('ready', setup);

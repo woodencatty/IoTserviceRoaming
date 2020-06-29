@@ -8,6 +8,9 @@ var ascoltatore = {
   mongo: {}
 };
  
+var moment = require('moment');
+require('moment-timezone');
+
 var settings = {
   port: 1883,
   backend: ascoltatore
@@ -21,7 +24,9 @@ server.on('clientConnected', function(client) {
  
 // fired when a message is received
 server.on('published', function(packet, client) {
-  console.log('Published', packet.payload);
+  moment.tz.setDefault("Asia/Seoul");
+  var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+  console.log('Published at '+timeNow+ " Sent at "+ packet.payload.toString());
 });
  
 server.on('ready', setup);
@@ -30,22 +35,3 @@ server.on('ready', setup);
 function setup() {
   console.log('Mosca server is up and running');
 }
-
-//--------------------------------------------------------------------------------------------------------
-
-var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://test.mosquitto.org')
- 
-client.on('connect', function () {
-  client.subscribe('presence', function (err) {
-    if (!err) {
-      client.publish('presence', 'Hello mqtt')
-    }
-  })
-})
- 
-client.on('message', function (topic, message) {
-  // message is Buffer
-  console.log(message.toString())
-  client.end()
-})

@@ -1,12 +1,20 @@
 var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://192.9.44.51:1883')
- 
+var client = mqtt.connect('mqtt://127.0.0.1:1883')
+
+var moment = require('moment');
+require('moment-timezone');
+var count = 0;
+
+
 client.on('connect', function () {
-      client.publish('/session/abcd001', 'Hello mqtt')
-})
- 
-client.on('message', function (topic, message) {
-  // message is Buffer
-  console.log(message.toString())
-  client.end()
+  var sendMessage = setInterval(() => {
+
+    moment.tz.setDefault("Asia/Seoul");
+    var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+    client.publish('/session/abcd001', timeNow)
+
+    if (count > 1000) {
+      clearInterval(sendMessage);
+    }
+  }, 100)
 })
