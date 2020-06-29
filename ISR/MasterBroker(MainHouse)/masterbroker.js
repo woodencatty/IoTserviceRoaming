@@ -25,30 +25,32 @@ function setup() {
   console.log('ISR Platform Broker on');
 }
 
-// fired when a message is received
-server.on('published', function (packet, client) {
-  moment.tz.setDefault("Asia/Seoul");
-  var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-  var topic_arr = packet.topic.split("/");
-  // if(topic_arr[3] == "subscribes"){
-  //   console.log('Published at '+timeNow+ "| topic :  "+packet.topic+" | message : "+ packet.payload);
-  // }
-});
+
 
 //ISR Manager-----------------------------------------------------------------------------
 
+var user_session = {
+  user_id = "",
+  broker_id = "",
+  session_id = ""
+}
 
 server.on('subscribed', (topic, client) => {
   var topic_arr = topic.split("/");
-  var user_id = topic_arr[0]
+  var broker_id = topic_arr[0]
+  var user_id = topic_arr[1]
 
-  if (topic_arr[1] == "session") {
-    if (topic_arr[2] == "request") {
+  if (topic_arr[2] == "session") {
+    if (topic_arr[3] == "request") {
 
       var ISR_Manager = mqtt.connect('mqtt://127.0.0.1:1884')
       ISR_Manager.on('connect', function () {
         console.log('ISR Manager on');
       })
+      user_session.user_id = user_id;
+      user_session.broker_id = broker_id;
+      user_session.session_id = "vs56lj";
+      
       console.log(user_id + " requested " + topic)
       ISR_Manager.publish(topic, '{"session" : "vs56lj", "status" : "granted"}')
       console.log("session granted to " + user_id)
@@ -58,18 +60,6 @@ server.on('subscribed', (topic, client) => {
   }
 
 })
-
-server.on('clientDisconnected', function (client) {
-  console.log('clientDisconnected ', client.id);
-
-  //var client = mqtt.connect('mqtt://127.0.0.1:1884')
-
-  // client.on('connect', function () {
-  //     client.publish('/User/'+client.id, "leave");
-  // })
-
-});
-
 
 function makeSessionId(length) {
   var result = '';

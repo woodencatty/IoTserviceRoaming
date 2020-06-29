@@ -3,6 +3,8 @@ var mqtt = require('mqtt')
 var moment = require('moment');
 require('moment-timezone');
 
+var broker_id = "broker01"
+
 var ascoltatore = {
   type: 'mongo',
   url: 'mongodb://localhost:27017/mqtt',
@@ -49,7 +51,7 @@ server.on('subscribed', (topic, client) => {
     if (topic_arr[2] == "request") {
       console.log(user_id + " requested " + topic)
 
-      Agent_to_Master.subscribe(user_id + '/session/request', function (err) {
+      Agent_to_Master.subscribe(broker_id+'/'+user_id + '/session/request', function (err) {
         console.log("Session Applied to Master (error :" + err + ")");
       })
     }
@@ -58,12 +60,12 @@ server.on('subscribed', (topic, client) => {
 
 Agent_to_Master.on('message', function (topic, message) {
   var topic_arr = topic.split("/");
-  var user_id = topic_arr[0]
+  var user_id = topic_arr[1]
 
-  if (topic_arr[1] == "session") {
-    if (topic_arr[2] == "request") {
+  if (topic_arr[2] == "session") {
+    if (topic_arr[3] == "request") {
       console.log(user_id + " Assigned ");
-      Agent_to_Master.unsubscribe(user_id + '/session/request', ()=>{
+      Agent_to_Master.unsubscribe(topic, () => {
         var Agent_to_Client = mqtt.connect('mqtt://127.0.0.1:1883')
         Agent_to_Client.on('connect', function () {
           console.log('ISR Agent Client on');
@@ -74,24 +76,3 @@ Agent_to_Master.on('message', function (topic, message) {
     }
   }
 })
-
-
-server.on('clientDisconnected', function (client) {
-  console.log('clientDisconnected ', client.id);
-
-  //var client = mqtt.connect('mqtt://127.0.0.1:1884')
-
-  // client.on('connect', function () {
-  //     client.publish('/User/'+client.id, "leave");
-  // })
-
-});
-
-server.on('published', function(packet, client) {
-  console.log('Published', packet.payload.toString() + packet.topic );
-});
-
-
-server.on('subscribed', function(topic, client) {
-  console.log('subscribed', topic);
-});

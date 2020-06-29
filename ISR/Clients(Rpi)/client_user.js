@@ -25,15 +25,15 @@ client.on('message', function (topic, message) {
         session_info = JSON.parse(message);
         console.log(message + "assigned");
 
-        client.subscribe('/session/'+session_info.session, function (err) {
-          console.log("sensor_data subscribe to "+ session_info.session + "(error :" + err + ")")
+        client.subscribe('/session/' + session_info.session, function (err) {
+          console.log("sensor_data subscribe to " + session_info.session + "(error :" + err + ")")
         })
       })
-    }else{
+    } else {
       moment.tz.setDefault("Asia/Seoul");
       var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-      console.log("["+timeNow+"] message at " +topic+" : "+message + "    message time easped: " + moment.duration(moment(timeNow).diff(moment(message))).asMilliseconds());
+      console.log("[" + timeNow + "] message at " + topic + " : " + message + "    message time easped: " + moment.duration(moment(timeNow).diff(moment(message))).asMilliseconds());
     }
-  } 
+  }
 
 })

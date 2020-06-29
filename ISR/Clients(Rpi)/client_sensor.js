@@ -26,17 +26,17 @@ client.on('message', function (topic, message) {
         session_info = JSON.parse(message);
         console.log(message + "assigned");
 
-        
-    var sendMessage = setInterval(() => {
 
-      moment.tz.setDefault("Asia/Seoul");
-      var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-      client.publish('/session/'+session_info.session, timeNow)
-      console.log("datasend to "+session_info.session);
-      if (count > 1000) {
-        clearInterval(sendMessage);
-      }
-    }, 1000)
+        var sendMessage = setInterval(() => {
+
+          moment.tz.setDefault("Asia/Seoul");
+          var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+          client.publish('/session/' + session_info.session, timeNow)
+          console.log("datasend to " + session_info.session);
+          if (count > 1000) {
+            clearInterval(sendMessage);
+          }
+        }, 100)
 
       })
     }
