@@ -12,7 +12,7 @@ var moment = require('moment');
 require('moment-timezone');
 
 var settings = {
-  port: 1883,
+  port: 1884,
   backend: ascoltatore
 };
  
@@ -24,9 +24,7 @@ server.on('clientConnected', function(client) {
  
 // fired when a message is received
 server.on('published', function(packet, client) {
-  moment.tz.setDefault("Asia/Seoul");
-  var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-  console.log('Published at '+timeNow+ " Sent at "+ packet.payload.toString());
+  console.log("sent_log "+ packet.payload.toString());
 });
  
 server.on('ready', setup);
@@ -35,3 +33,6 @@ server.on('ready', setup);
 function setup() {
   console.log('Mosca server is up and running');
 }
+
+//ISR Manager-----------------------------------------------------------------------------
+
