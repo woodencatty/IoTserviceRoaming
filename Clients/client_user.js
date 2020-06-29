@@ -3,7 +3,6 @@ var client  = mqtt.connect('mqtt://192.9.44.51:1883')
  
 client.on('connect', function () {
   client.subscribe('/session/abcd001', function (err) {
-    console.log(err);
   })
 })
  
