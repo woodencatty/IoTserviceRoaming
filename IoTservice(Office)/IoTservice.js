@@ -1,5 +1,5 @@
 var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://203.249.127.29:1883')
+var client  = mqtt.connect('mqtt://203.249.127.29:3389')
  
 client.on('connect', function () {
   client.subscribe('/session/abcd001', function (err) {

@@ -9,7 +9,7 @@ var ascoltatore = {
 };
  
 var settings = {
-  port: 8080,
+  port: 3389,
   backend: ascoltatore
 };
  
