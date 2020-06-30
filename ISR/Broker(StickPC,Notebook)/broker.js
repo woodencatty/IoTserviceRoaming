@@ -14,7 +14,7 @@ var ascoltatore = {
 };
 
 var settings = {
-  port: 1883,
+  port: 1884,
   backend: ascoltatore
 };
 
@@ -25,7 +25,7 @@ function setup() {
   console.log('ISR Platform Broker on');
 }
 
-var Agent_to_Master = mqtt.connect('mqtt://127.0.0.1:1884')
+var Agent_to_Master = mqtt.connect('mqtt://127.0.0.1:1888')
 Agent_to_Master.on('connect', function () {
   console.log('ISR Agent Server on');
 })
@@ -67,7 +67,7 @@ Agent_to_Master.on('message', function (topic, message) {
     if (topic_arr[3] == "request") {
       console.log(user_id + " Assigned ");
       Agent_to_Master.unsubscribe(topic, () => {
-        var Agent_to_Client = mqtt.connect('mqtt://127.0.0.1:1883')
+        var Agent_to_Client = mqtt.connect('mqtt://127.0.0.1:1884')
         Agent_to_Client.on('connect', function () {
           console.log('ISR Agent Client on');
           Agent_to_Client.publish(user_id + '/session/request', message.toString())

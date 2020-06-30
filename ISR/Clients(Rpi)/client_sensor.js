@@ -1,9 +1,11 @@
 var mqtt = require('mqtt')
-var client = mqtt.connect('mqtt://127.0.0.1:1883')
+var client = mqtt.connect('mqtt://14.32.236.225:1884')
 
 var moment = require('moment');
 require('moment-timezone');
 var count = 0;
+var trigger = 0;
+
 
 var user_id = "user01";
 var session_info;
@@ -33,9 +35,22 @@ client.on('message', function (topic, message) {
           var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
           client.publish('/session/' + session_info.session, timeNow)
           console.log("datasend to " + session_info.session);
-          if (count > 1000) {
-            clearInterval(sendMessage);
+          if (count = 100) {
+            if(trigger = 0){
+              client.end();
+              client = mqtt.connect('mqtt://14.32.236.225:1885')
+              trigger = 1;
+              count = 0;
+              clearInterval(sendMessage);
+            }else{
+              client.end();
+              client = mqtt.connect('mqtt://14.32.236.225:1885')
+              trigger = 0
+              count = 0;
+              clearInterval(sendMessage);
+            }
           }
+          count ++;
         }, 100)
 
       })
