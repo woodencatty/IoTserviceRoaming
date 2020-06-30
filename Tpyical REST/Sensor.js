@@ -22,7 +22,7 @@ request.post(
       
   moment.tz.setDefault("Asia/Seoul");
   var timeReturn = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-      console.log("Time Easped Try "+ count +" : "+"("+ timeReturn+"-"+body+")");
+      console.log("Time Easped Try "+ count +" : "+"("+ timeReturn+"-"+body+")"+ +"    message time easped: " + moment.duration(moment(timeReturn).diff(moment(body))).asMilliseconds());
       count ++;
     }
   })
