@@ -25,7 +25,7 @@ http.createServer(function (request, response) {
 moment.tz.setDefault("Asia/Seoul");
 var timerescived = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
 
-      console.log(post.sender + " Data Received "+ post.count +" : "+ "("+timerescived+ "-"+ post.timesent+")");
+      console.log(post.sender + " Data Received "+ post.count +" : "+ "("+timerescived+ "-"+ post.timesent+")" +"    message time easped: " + moment.duration(moment(timerescived).diff(moment(post.timesent))).asMilliseconds());
 
       response.end(post.timesent)
     })
