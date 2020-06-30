@@ -5,6 +5,7 @@ require('moment-timezone');
 
 var broker_id = "broker01"
 
+
 var ascoltatore = {
   type: 'mongo',
   url: 'mongodb://localhost:27017/mqtt',

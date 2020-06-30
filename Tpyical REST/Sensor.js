@@ -12,7 +12,7 @@ var sendMessage = setInterval(()=>{
   var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
 request.post(
   {
-    url: 'http://127.0.0.1:8080',
+    url: 'http://14.32.236.225:61234',
     form: { count : count ,timesent : timeNow, sender : "IoTSensor01"}
   },
   function (err, httpResponse, body) {

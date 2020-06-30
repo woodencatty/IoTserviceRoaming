@@ -32,6 +32,7 @@ function setup() {
 var user_session = {
   user_id = "",
   broker_id = "",
+  broker_ip = "",
   session_id = ""
 }
 
@@ -50,7 +51,8 @@ server.on('subscribed', (topic, client) => {
       user_session.user_id = user_id;
       user_session.broker_id = broker_id;
       user_session.session_id = "vs56lj";
-
+      user_session.broker_ip = client.connection.stream.remoteAddress;
+      
       console.log(user_id + " requested " + topic)
       ISR_Manager.publish(topic, '{"session" : "vs56lj", "status" : "granted"}')
       ISR_Manager.publish(user_id+'/session/info', user_session);
