@@ -33,4 +33,4 @@ var timerescived = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
   } else {
     console.log('other case requested...');
   }
-}).listen(61234, function () { console.log('REST Data Center Running at http://127.0.0.1:8080'); });
+}).listen(61234, function () { console.log('REST Data Center Running at 61234'); });
