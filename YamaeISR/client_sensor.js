@@ -17,18 +17,10 @@ client.on('connect', function () {
   moment.tz.setDefault("Asia/Seoul");
   var timeNow2 = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
     console.log(timeNow2 + " - SESSION_APPLY (error :null)")
-})
-
-client.on('message', function (topic, message) {
-
-  var topic_arr = topic.split("/");
-  var user_id = topic_arr[0]
-
+    
   moment.tz.setDefault("Asia/Seoul");
   var temp = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-        session_info = JSON.parse(message);
         console.log(temp + " - user01 Assigned on abcd001");
-
 
         var sendMessage = setInterval(() => {
 
@@ -65,6 +57,16 @@ client.on('message', function (topic, message) {
             clearInterval(sendMessage);
           }
         }, 100)
+
+
+})
+
+client.on('message', function (topic, message) {
+
+  var topic_arr = topic.split("/");
+  var user_id = topic_arr[0]
+
+
 
 
 })
