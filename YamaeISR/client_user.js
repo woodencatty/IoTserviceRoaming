@@ -15,8 +15,7 @@ var connected = 0;
 var user_id = "user01";
 var session_info;
 
-client.on('connect', function () {if(connected = 0){
-  console.log(connected)
+client.on('connect', function () {
   moment.tz.setDefault("Asia/Seoul");
   var timeNow2 = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
     console.log(timeNow2 + " - SESSION_APPLY (error :" + err + ")")
@@ -29,8 +28,6 @@ client.on('connect', function () {if(connected = 0){
     client.subscribe('/session/abcd001', function (err) {
       console.log(temp + " - Session Use on  (error :" + err + ")")
     })
-    connected = 1
-}
   
 })
 
