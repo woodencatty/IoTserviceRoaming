@@ -10,16 +10,20 @@ require('moment-timezone');
 var count = 0;
 var trigger = 1;
 var set = 0;
+var connected = 0;
 
 var user_id = "user01";
 var session_info;
 
-client.on('connect', function () {
+client.on('connect', function () {if(connected = 0){
   moment.tz.setDefault("Asia/Seoul");
   var timeNow2 = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
   client.subscribe('/' + user_id + '/session/request', function (err) {
     console.log(timeNow2 + " - SESSION_APPLY (error :" + err + ")")
+    connected = 1
   })
+}
+  
 })
 
 
@@ -31,7 +35,6 @@ console.log(message);
   if (topic_arr[1] == "session") {
     if (topic_arr[2] == "request") {
       client.unsubscribe(user_id + '/session/request', () => {
-
 
         moment.tz.setDefault("Asia/Seoul");
         var temp = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
