@@ -35,12 +35,13 @@ client.on('message', function (topic, message) {
 console.log(message);
   var topic_arr = topic.split("/");
   var user_id = topic_arr[0]
+  payload = JSON.parse(message);
 
       moment.tz.setDefault("Asia/Seoul");
         var temp2 = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-      console.log(temp2 + " - Message sent : " + message);
+      console.log(temp2 + " - Message sent : " + payload);
 
-      if(message.trigger = 0){
+      if(payload.trigger = 0){
         trigger = 1;
         count = 0;
         console.log("change to Broker 2");
