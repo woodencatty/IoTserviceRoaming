@@ -6,6 +6,10 @@ var Broker2 = 'mqtt://192.168.0.9:1885';
 
 var client = mqtt.connect(Broker2)
 
+var moment = require('moment');
+require('moment-timezone');
+
+
 client.on('connect', function () {
 
   var trigger = 0;
