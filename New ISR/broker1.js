@@ -36,13 +36,18 @@ server.on('subscribed', (topic, client)=>{
   if (topic_arr[2] == "session") {
     if (topic_arr[3] == "request") {
 
-      var message = {
+      var payload = {
         userid: user_id,
-        session: 'abcde01', // or a Buffer
+        session: 'abcde01'
+      }
+      var message = {
+        topic : "/"+user_id+"/session/request",
+        payload: payload,
+         // or a Buffer
         qos: 0, // 0, 1, or 2
         retain: false // or true
       };
-      server.publish(JSON.stringify(message), ()=>{
+      server.publish(message, ()=>{
         
   moment.tz.setDefault("Asia/Seoul");
   var temp = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
