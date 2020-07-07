@@ -46,6 +46,21 @@ client.on('message', function (topic, message) {
       moment.tz.setDefault("Asia/Seoul");
         var temp2 = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
       console.log(temp2 + " - Message sent : " + message);
+
+      if(message.trigger = 0){
+        trigger = 1;
+        count = 0;
+        console.log("change to Broker 2");
+        client.end();
+        client = mqtt.connect(Broker2)
+      }else{
+        trigger = 0
+        count = 0;
+        console.log("change to Broker 1");
+        client.end();
+        client = mqtt.connect(Broker1)
+      }
+
     }
   }
 })

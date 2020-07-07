@@ -60,10 +60,10 @@ client.on('message', function (topic, message) {
               trigger = 0
               count = 0;
               console.log("change to Broker 1");
-              clearInterval(sendMessage);
               client.end();
               client = mqtt.connect(Broker1)
               set ++;
+              clearInterval(sendMessage);
             }
           }
           count ++;
