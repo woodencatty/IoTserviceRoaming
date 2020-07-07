@@ -6,6 +6,7 @@ var Broker2 = 'mqtt://192.168.0.9:1885';
 
 var moment = require('moment');
 require('moment-timezone');
+
 var count = 0;
 var trigger = 1;
 var set = 0;
@@ -23,7 +24,7 @@ client.on('connect', function () {
 
 
 client.on('message', function (topic, message) {
-
+console.log(message);
   var topic_arr = topic.split("/");
   var user_id = topic_arr[0]
 
