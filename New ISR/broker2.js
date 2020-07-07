@@ -32,11 +32,11 @@ server.on('clientConnected', function(client) {
 server.on('subscribed', (topic, client)=>{
   console.log("subscribed!  " + topic + "  "+client)
   var topic_arr = topic.split("/");
-  var user_id = topic_arr[0]
+  var user_id = topic_arr[1]
   console.log(topic_arr);
 
-  if (topic_arr[1] == "session") {
-    if (topic_arr[2] == "request") {
+  if (topic_arr[2] == "session") {
+    if (topic_arr[3] == "request") {
 
       var message = {
         userid: user_id,
