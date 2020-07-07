@@ -7,7 +7,7 @@ var Broker2 = 'mqtt://192.168.0.9:1885';
 var client = mqtt.connect(Broker2)
 
 var count = 0;
-var trigger = 0;
+var trigger = 2;
 
 
 var moment = require('moment');
@@ -31,7 +31,7 @@ var payload = {
       
       if(count>100){
       count=0;
-      if(trigger == 0){
+      if(trigger == 2){
         clearInterval(sendMessage);
         client.end();
         client = mqtt.connect(Broker1);
@@ -40,7 +40,7 @@ var payload = {
         clearInterval(sendMessage);
         client.end();
         client = mqtt.connect(Broker2);
-        trigger = 0;
+        trigger = 2;
       }
       }
       count++;

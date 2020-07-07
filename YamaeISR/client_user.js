@@ -21,13 +21,13 @@ moment.tz.setDefault("Asia/Seoul");
 var timerescived = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
 console.log(payload)
  console.log(" Data Received from IoT Sensor"+ payload.trigger +" : "+ "("+timerescived+ "-"+ payload.timesent+")" +"    message time easped: " + moment.duration(moment(timerescived).diff(moment(payload.timesent))).asMilliseconds());
-
- if(payload.trigger == 0){
-  client.end();
-  client = mqtt.connect(Broker1);
-}else {
-  client.end();
-  client = mqtt.connect(Broker2);
+if(count>100){
+  if(payload.trigger == 2){
+    client.end();
+    client = mqtt.connect(Broker1);
+  }else {
+    client.end();
+    client = mqtt.connect(Broker2);
+  }
 }
-
 })
