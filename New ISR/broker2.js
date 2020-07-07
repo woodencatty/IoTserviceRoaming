@@ -23,20 +23,17 @@ var server = new mosca.Server(moscaSettings);
 server.on('ready', setup);
 
 server.on('clientConnected', function(client) {
-	console.log('client connected', client.id);		
-});
-
-
-// fired when a message is received
-server.on('published', function(packet, client) {
   moment.tz.setDefault("Asia/Seoul");
   var temp = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+	console.log(temp + ' - client connected');		
 });
+
 
 server.on('subscribed', (topic, client)=>{
   console.log("subscribed!  " + topic + "  "+client)
   var topic_arr = topic.split("/");
   var user_id = topic_arr[0]
+  console.log(topic_arr);
 
   if (topic_arr[1] == "session") {
     if (topic_arr[2] == "request") {
