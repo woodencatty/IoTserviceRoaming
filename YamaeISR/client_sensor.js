@@ -43,6 +43,7 @@ var payload = {
         trigger = 0;
       }
       }
+      count++;
       }, 100)
 })
  
