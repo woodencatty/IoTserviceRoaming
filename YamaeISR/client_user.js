@@ -16,7 +16,10 @@ client.on('connect', function () {
 client.on('message', function (topic, message) {
   // message is Buffer
 var payload = JSON.parse(message.toString());
+
+moment.tz.setDefault("Asia/Seoul");
+var timerescived = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
 console.log(payload)
- // console.log(" Data Received "+ post.count +" : "+ "("+timerescived+ "-"+ post.timesent+")" +"    message time easped: " + moment.duration(moment(timerescived).diff(moment(post.timesent))).asMilliseconds());
+ console.log(" Data Received from IoT Sensor"+ payload.trigger +" : "+ "("+timerescived+ "-"+ payload.timesent+")" +"    message time easped: " + moment.duration(moment(timerescived).diff(moment(payload.timesent))).asMilliseconds());
 
 })
