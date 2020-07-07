@@ -7,6 +7,8 @@ var Broker2 = 'mqtt://192.168.0.9:1885';
 var client = mqtt.connect(Broker2)
 
 var count = 0;
+var trigger = 0;
+
 
 var moment = require('moment');
 require('moment-timezone');
@@ -14,7 +16,6 @@ require('moment-timezone');
 
 client.on('connect', function () {
 
-  var trigger = 0;
 
 var sendMessage = setInterval(()=>{
   moment.tz.setDefault("Asia/Seoul");
@@ -27,9 +28,19 @@ var payload = {
 
       client.publish('/session/abcd001', JSON.stringify(payload))
       
-      if(count>1000){
+      if(count>100){
       count=0;
+      if(trigger = 0){
         clearInterval(sendMessage);
+        client.end();
+        client = mqtt.connect(Broker1);
+        trigger = 1;
+      }else {
+        clearInterval(sendMessage);
+        client.end();
+        client = mqtt.connect(Broker2);
+        trigger = 0;
+      }
       }
       }, 100)
 })

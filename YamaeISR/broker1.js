@@ -1,7 +1,5 @@
 var mosca = require('mosca')
 
-var moment = require('moment');
-require('moment-timezone');
 var ascoltatore = {
   //using ascoltatore
   type: 'mongo',		
@@ -11,7 +9,7 @@ var ascoltatore = {
 };
 
 var moscaSettings = {
-  port: 1884,
+  port: 1885,
   backend: ascoltatore,
   persistence: {
     factory: mosca.persistence.Mongo,
@@ -23,42 +21,15 @@ var server = new mosca.Server(moscaSettings);
 server.on('ready', setup);
 
 server.on('clientConnected', function(client) {
-  moment.tz.setDefault("Asia/Seoul");
-  var temp = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-	console.log(temp + ' - client connected');		
+	console.log('client connected', client.id);		
 });
 
-
-server.on('subscribed', (topic, client)=>{
-  var topic_arr = topic.split("/");
-  var user_id = topic_arr[1]
-
-  if (topic_arr[2] == "session") {
-    if (topic_arr[3] == "request") {
-
-      var payload = {
-        userid: user_id,
-        session: 'abcde01'
-      }
-      var message = {
-        topic : "/"+user_id+"/session/request",
-        payload: payload,
-         // or a Buffer
-        qos: 0, // 0, 1, or 2
-        retain: false // or true
-      };
-      server.publish(message, ()=>{
-        
-  moment.tz.setDefault("Asia/Seoul");
-  var temp = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-        console.log(temp + " - session granted!")
-      })
-
-    }
-  }
-})
+// fired when a message is received
+server.on('published', function(packet, client) {
+  console.log('Published', packet.payload);
+});
 
 // fired when the mqtt server is ready
 function setup() {
-  console.log('Broker 1 is up and running on 1884')
+  console.log('Mosca server is up and running')
 }
