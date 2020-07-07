@@ -8,7 +8,7 @@ var moment = require('moment');
 require('moment-timezone');
 
 var count = 0;
-var trigger = 1;
+var trigger = 0;
 var set = 0;
 var connected = 0;
 
