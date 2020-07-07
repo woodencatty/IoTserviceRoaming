@@ -29,23 +29,8 @@ var payload = {
 
       client.publish('/session/abcd001', JSON.stringify(payload))
       
-      if(count>100){
-      count=0;
-      if(trigger == 2){
+      if(count>1000){
         clearInterval(sendMessage);
-        client.end();
-        setTimeout(()=>{
-          client = mqtt.connect(Broker1);
-        }, 1000)
-        trigger = 1;
-      }else {
-        clearInterval(sendMessage);
-        client.end();
-        setTimeout(()=>{
-          client = mqtt.connect(Broker2);
-        }, 1000)
-        trigger = 2;
-      }
       }
       count++;
       }, 100)
