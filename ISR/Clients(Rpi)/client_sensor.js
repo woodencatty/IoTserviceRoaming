@@ -41,12 +41,14 @@ client.on('message', function (topic, message) {
               client = mqtt.connect('mqtt://14.32.236.225:1885')
               trigger = 1;
               count = 0;
+              console.log("change to Broker 2");
               clearInterval(sendMessage);
             }else{
               client.end();
-              client = mqtt.connect('mqtt://14.32.236.225:1885')
+              client = mqtt.connect('mqtt://14.32.236.225:1884')
               trigger = 0
               count = 0;
+              console.log("change to Broker 1");
               clearInterval(sendMessage);
             }
           }
