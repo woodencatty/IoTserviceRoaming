@@ -32,7 +32,7 @@ client.on('connect', function () {
             "trigger" : trigger
           }
 
-          client.publish('/session/abcd001', sendingData)
+          client.publish('/session/abcd001', JSON.stringify(sendingData))
           console.log(timeNow + " - data send to /session/abcd001");
           if (count = 100) {
             if(trigger = 0){
