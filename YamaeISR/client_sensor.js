@@ -13,13 +13,10 @@ var set = 0;
 var user_id = "user01";
 var session_info;
 
-client.on('connect', function () {if(connected = 0){
-  console.log(connected)
+client.on('connect', function () {
   moment.tz.setDefault("Asia/Seoul");
   var timeNow2 = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-    console.log(timeNow2 + " - SESSION_APPLY (error :" + err + ")")
-    connected = 1
-}
+    console.log(timeNow2 + " - SESSION_APPLY (error :null)")
 })
 
 client.on('message', function (topic, message) {
