@@ -23,7 +23,8 @@ var sendMessage = setInterval(()=>{
 
 var payload = {
   timesent : timesent,
-  trigger : trigger 
+  trigger : trigger, 
+  count : count
 }
 
       client.publish('/session/abcd001', JSON.stringify(payload))
