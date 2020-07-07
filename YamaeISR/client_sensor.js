@@ -6,6 +6,8 @@ var Broker2 = 'mqtt://192.168.0.9:1885';
 
 var client = mqtt.connect(Broker2)
 
+var count = 0;
+
 var moment = require('moment');
 require('moment-timezone');
 
@@ -26,6 +28,7 @@ var payload = {
       client.publish('/session/abcd001', JSON.stringify(payload))
       
       if(count>1000){
+      count=0;
         clearInterval(sendMessage);
       }
       }, 100)
