@@ -16,7 +16,7 @@ var session_info;
 client.on('connect', function () {
   moment.tz.setDefault("Asia/Seoul");
   var timeNow2 = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-  client.subscribe('/' +suser_id + '/session/request', function (err) {
+  client.subscribe('/' +user_id + '/session/request', function (err) {
     console.log(timeNow2 + " - SESSION_APPLY (error :" + err + ")")
   })
 })
