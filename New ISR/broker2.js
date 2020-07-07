@@ -32,6 +32,7 @@ server.on('published', function(packet, client) {
 });
 
 server.on('subscribed', (topic, client)=>{
+  console.log("subscribed!  " + topic + "  "+client)
   var topic_arr = topic.split("/");
   var user_id = topic_arr[0]
 
