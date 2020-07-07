@@ -31,7 +31,7 @@ var payload = {
       
       if(count>100){
       count=0;
-      if(trigger = 0){
+      if(trigger == 0){
         clearInterval(sendMessage);
         client.end();
         client = mqtt.connect(Broker1);
