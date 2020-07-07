@@ -44,7 +44,7 @@ server.on('subscribed', (topic, client)=>{
         qos: 0, // 0, 1, or 2
         retain: false // or true
       };
-      server.publish(message, ()=>{
+      server.publish(JSON.stringify(message), ()=>{
         
   moment.tz.setDefault("Asia/Seoul");
   var temp = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
