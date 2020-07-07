@@ -22,8 +22,7 @@ client.on('connect', function () {
 
     moment.tz.setDefault("Asia/Seoul");
     var temp = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-    session_info = JSON.parse(message);
-    console.log(temp + " - uwer001 Assigned on abcd001");
+    console.log(temp + " - user001 Assigned on abcd001");
 
     client.subscribe('/session/abcd001', function (err) {
       console.log(temp + " - Session Use on  (error :" + err + ")")
