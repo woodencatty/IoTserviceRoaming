@@ -1,8 +1,8 @@
 var mqtt = require('mqtt')
-var client = mqtt.connect('mqtt://14.32.236.225:1884')
+var client = mqtt.connect('mqtt://192.168.0.6:1884')
 
-var Broker1 = 'mqtt://14.32.236.225:1884';
-var Broker2 = 'mqtt://14.32.236.225:1885';
+var Broker1 = 'mqtt://192.168.0.6:1884';
+var Broker2 = 'mqtt://192.168.0.9:1885';
 
 var moment = require('moment');
 require('moment-timezone');
