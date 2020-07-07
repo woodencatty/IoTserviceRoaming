@@ -24,10 +24,14 @@ console.log(payload)
 if(payload.count>100){
   if(payload.trigger == 2){
     client.end();
-    client = mqtt.connect(Broker1);
+    setTimeout(()=>{
+      client = mqtt.connect(Broker1);
+    }, 1000)
   }else {
     client.end();
-    client = mqtt.connect(Broker2);
+    setTimeout(()=>{
+      client = mqtt.connect(Broker2);
+    }, 1000)
   }
 }
 })

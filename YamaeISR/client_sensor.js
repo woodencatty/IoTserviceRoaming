@@ -34,12 +34,16 @@ var payload = {
       if(trigger == 2){
         clearInterval(sendMessage);
         client.end();
-        client = mqtt.connect(Broker1);
+        setTimeout(()=>{
+          client = mqtt.connect(Broker1);
+        }, 1000)
         trigger = 1;
       }else {
         clearInterval(sendMessage);
         client.end();
-        client = mqtt.connect(Broker2);
+        setTimeout(()=>{
+          client = mqtt.connect(Broker2);
+        }, 1000)
         trigger = 2;
       }
       }
