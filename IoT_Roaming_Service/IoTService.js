@@ -22,7 +22,7 @@ client.on('connect', function () {if(connected = 0){
   
 })
 
-
+/*
 client.on('message', function (topic, message) {
     
         message_parsed = JSON.parse(message);
@@ -52,3 +52,4 @@ client2.on('message', function (topic, message) {
         message_parsed = JSON.parse(message);
         console.log("from Broker 2 :" + message);
 })
+*/
