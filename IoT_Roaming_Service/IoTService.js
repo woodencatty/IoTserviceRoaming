@@ -55,6 +55,6 @@ client2.on('message', function (topic, message) {  moment.tz.setDefault("Asia/Se
 
         message_parsed = JSON.parse(message);
 
-        console.log(" Broker 1 : from IoT Sensor " + "("+timerescived+ "-"+ message_parsed.timesent+")" +"    message time easped: " + moment.duration(moment(timerescived).diff(moment(message_parsed.timesent))).asMilliseconds());
+        console.log(" Broker 2 : from IoT Sensor " + "("+timerescived+ "-"+ message_parsed.timesent+")" +"    message time easped: " + moment.duration(moment(timerescived).diff(moment(message_parsed.timesent))).asMilliseconds());
 
 })
