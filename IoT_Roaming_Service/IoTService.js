@@ -25,7 +25,9 @@ client.on('connect', function () {
 client.on('message', function (topic, message) {
     
         message_parsed = JSON.parse(message);
-        console.log("from Broker 1 :" + message);
+        
+        console.log(" Broker 1 : from IoT Sensor " + "("+timerescived+ "-"+ message_parsed.timesent+")" +"    message time easped: " + moment.duration(moment(timerescived).diff(moment(message_parsed.timesent))).asMilliseconds());
+
 })
 /*
 var Broker2 = 'mqtt://183.97.43.212:1883';
