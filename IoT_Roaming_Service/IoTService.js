@@ -11,14 +11,13 @@ require('moment-timezone');
 var count = 0;
 var message_parsed;
 
-client.on('connect', function () {if(connected = 0){
-  console.log(connected)
+client.on('connect', function () {
+  
   moment.tz.setDefault("Asia/Seoul");
   var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
   client.subscribe('/session/abcd001', function (err) {
     console.log(timeNow + " CONNECTED to Broker1 (error :" + err + ")")
   })
-}
   
 })
 
