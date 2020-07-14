@@ -16,7 +16,7 @@ client.on('connect', function () {if(connected = 0){
   moment.tz.setDefault("Asia/Seoul");
   var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
   client.subscribe('/session/abcd001', function (err) {
-    console.log(timeNow + " - SESSION_APPLY (error :" + err + ")")
+    console.log(timeNow + " CONNECTED to Broker1 (error :" + err + ")")
   })
 }
   
@@ -26,6 +26,7 @@ client.on('connect', function () {if(connected = 0){
 client.on('message', function (topic, message) {
     
         message_parsed = JSON.parse(message);
+        console.log("from Broker 1 :" + message);
 })
 
 var Broker2 = 'mqtt://183.97.43.212:1883';
@@ -40,7 +41,7 @@ client2.on('connect', function () {if(connected = 0){
   moment.tz.setDefault("Asia/Seoul");
   var timeNow2 = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
   client2.subscribe('/session/abcd001', function (err) {
-    console.log(timeNow2 + " - SESSION_APPLY (error :" + err + ")")
+    console.log(timeNow2 + "  CONNECTED to Broker2 (error :" + err + ")")
   })
 }
   
@@ -49,4 +50,5 @@ client2.on('connect', function () {if(connected = 0){
 
 client2.on('message', function (topic, message) {
         message_parsed = JSON.parse(message);
+        console.log("from Broker 2 :" + message);
 })
