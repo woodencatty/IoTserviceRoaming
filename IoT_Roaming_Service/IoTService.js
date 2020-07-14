@@ -12,7 +12,7 @@ var count = 0;
 var message_parsed;
 
 client.on('connect', function () {
-  
+
   moment.tz.setDefault("Asia/Seoul");
   var timeNow = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
   client.subscribe('/session/abcd001', function (err) {
@@ -21,13 +21,13 @@ client.on('connect', function () {
   
 })
 
-/*
+
 client.on('message', function (topic, message) {
     
         message_parsed = JSON.parse(message);
         console.log("from Broker 1 :" + message);
 })
-
+/*
 var Broker2 = 'mqtt://183.97.43.212:1883';
 
 var client2 = mqtt.connect(Broker2)
