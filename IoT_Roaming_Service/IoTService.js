@@ -32,7 +32,7 @@ client.on('message', function (topic, message) {
         console.log(" Broker 1 : from IoT Sensor " + "("+timerescived+ "-"+ message_parsed.timesent+")" +"    message time easped: " + moment.duration(moment(timerescived).diff(moment(message_parsed.timesent))).asMilliseconds());
 
 })
-/*
+
 var Broker2 = 'mqtt://183.97.43.212:1883';
 
 var client2 = mqtt.connect(Broker2)
@@ -40,20 +40,21 @@ var client2 = mqtt.connect(Broker2)
 var count = 0;
 var message_parsed;
 
-client2.on('connect', function () {if(connected = 0){
-  console.log(connected)
+client2.on('connect', function () {
   moment.tz.setDefault("Asia/Seoul");
   var timeNow2 = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
   client2.subscribe('/session/abcd001', function (err) {
     console.log(timeNow2 + "  CONNECTED to Broker2 (error :" + err + ")")
   })
-}
   
 })
 
 
-client2.on('message', function (topic, message) {
+client2.on('message', function (topic, message) {  moment.tz.setDefault("Asia/Seoul");
+  var timerescived = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+
         message_parsed = JSON.parse(message);
-        console.log("from Broker 2 :" + message);
+
+        console.log(" Broker 1 : from IoT Sensor " + "("+timerescived+ "-"+ message_parsed.timesent+")" +"    message time easped: " + moment.duration(moment(timerescived).diff(moment(message_parsed.timesent))).asMilliseconds());
+
 })
-*/
